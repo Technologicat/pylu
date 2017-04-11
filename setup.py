@@ -181,6 +181,11 @@ setup(
     # FIXME: force sdist, but sdist only, to keep the .pyx files (this puts them also in the bdist)
     package_data={'pylu': ['*.pxd', '*.pyx']},  # note: paths relative to each package
 
+    # Disable zip_safe, because:
+    #   - Cython won't find .pxd files inside installed .egg, hard to compile libs depending on this one
+    #   - dynamic loader may need to have the library unzipped to a temporary folder anyway (at import time)
+    zip_safe = False,
+
     # Usage examples; not in a package
     data_files = datafiles
 )

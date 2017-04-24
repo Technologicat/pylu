@@ -39,14 +39,14 @@ except ImportError:
 # Definitions
 #########################################################
 
-extra_compile_args_math_optimized    = ['-fopenmp', '-march=native', '-O2', '-msse', '-msse2', '-mfma', '-mfpmath=sse']
-extra_compile_args_math_debug        = ['-fopenmp', '-march=native', '-O0', '-g']
+extra_compile_args_math_optimized    = ['-march=native', '-O2', '-msse', '-msse2', '-mfma', '-mfpmath=sse']
+extra_compile_args_math_debug        = ['-march=native', '-O0', '-g']
 
 extra_compile_args_nonmath_optimized = ['-O2']
 extra_compile_args_nonmath_debug     = ['-O0', '-g']
 
-extra_link_args_optimized    = ['-fopenmp']
-extra_link_args_debug        = ['-fopenmp']
+extra_link_args_optimized    = []
+extra_link_args_debug        = []
 
 
 if build_type == 'optimized':

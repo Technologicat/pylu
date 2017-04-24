@@ -190,7 +190,7 @@ def solve_decomposed( double[:,::1] LU, int[::1] p, double[::1] b ):
 #            solve_decomposed_c( &LU[0,0], &p[0], &b[0], &x[0], n )
         solve_decomposed_c( &LU[0,0], &p[0], &b[0], &x[0], n )
 
-    return x
+    return np.asanyarray(x)
 
 # ------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -261,5 +261,5 @@ def solve_decomposed_banded( double[:,::1] LU, int[::1] p, int[::1] mincols, int
 #            solve_decomposed_banded_c( &LU[0,0], &p[0], &mincols[0], &maxcols[0], &b[0], &x[0], n )
         solve_decomposed_banded_c( &LU[0,0], &p[0], &mincols[0], &maxcols[0], &b[0], &x[0], n )
 
-    return x
+    return np.asanyarray(x)
 

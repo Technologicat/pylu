@@ -168,7 +168,7 @@ setup(
     provides = ["pylu"],
 
     # same keywords as used as topics on GitHub
-    keywords = ["numerical linear-equations cython"],
+    keywords = ["numerical linear-equations cython numpy solver"],
 
     ext_modules = cythonize( [ ext_module_dgesv ],
                              include_path = my_include_dirs,

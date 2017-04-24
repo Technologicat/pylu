@@ -139,7 +139,7 @@ setup(
     version = version,
     author = "Juha Jeronen",
     author_email = "juha.jeronen@jyu.fi",
-    url = "https://github.com/Technologicat/PyLU",
+    url = "https://github.com/Technologicat/pylu",
 
     description = "small nogil-compatible linear equation system solver",
     long_description = DESC,

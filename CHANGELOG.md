@@ -1,5 +1,8 @@
 ## Changelog
 
+### [v0.1.3]
+ - support both Python 3.4 and 2.7
+
 ### [v0.1.2]
  - **bugfix**: `solve_decomposed` and `solve_decomposed_banded` now return proper `np.ndarray` objects (not memoryview slices)
  - setup.py is now Python 3 compatible

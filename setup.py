@@ -129,7 +129,7 @@ ext_module_dgesv = ext_math( "pylu.dgesv" )
 # http://stackoverflow.com/questions/2058802/how-can-i-get-the-version-defined-in-setup-py-setuptools-in-my-package
 #
 import ast
-with file('pylu/__init__.py') as f:
+with open('pylu/__init__.py') as f:
     for line in f:
         if line.startswith('__version__'):
             version = ast.parse(line).body[0].value.s
@@ -162,6 +162,8 @@ setup(
                     "Programming Language :: Python",
                     "Programming Language :: Python :: 2",
                     "Programming Language :: Python :: 2.7",
+                    "Programming Language :: Python :: 3",
+                    "Programming Language :: Python :: 3.4",
                     "Topic :: Scientific/Engineering",
                     "Topic :: Scientific/Engineering :: Mathematics",
                     "Topic :: Software Development :: Libraries",

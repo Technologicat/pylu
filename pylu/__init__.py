@@ -15,7 +15,7 @@ to be as simple to use as possible.
 
 from __future__ import absolute_import  # https://www.python.org/dev/peps/pep-0328/
 
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 
 from .dgesv import *
 

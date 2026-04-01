@@ -232,14 +232,13 @@ cdef inline int solve_c( double* A, double* b, double* x, int n ) noexcept nogil
             LU[ i*n + j ] = A[ i*n + j ]
 
     if not decompose_lu_inplace_c( LU, p, n ):
+        free(p)
+        free(LU)
         return False
     solve_decomposed_c( LU, p, b, x, n )
 
     free(p)
-    p = NULL
-
     free(LU)
-    LU = NULL
 
     return True
 

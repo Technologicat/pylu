@@ -1,7 +1,7 @@
 project(
     'pylu',
     'cython', 'c',
-    version: '1.0.1.dev0',
+    version: files('pylu/VERSION'),
     license: 'BSD-2-Clause',
     meson_version: '>=1.3.0',
     default_options: [

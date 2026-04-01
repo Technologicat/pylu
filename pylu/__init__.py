@@ -13,6 +13,7 @@ Python and Cython interfaces are provided. The API is designed
 to be as simple to use as possible.
 """
 
-__version__ = '1.0.1.dev0'
+from pathlib import Path as _Path
+__version__ = (_Path(__file__).parent / "VERSION").read_text().strip()
 
 from .dgesv import *

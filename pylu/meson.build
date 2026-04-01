@@ -12,9 +12,10 @@ py.extension_module(
     subdir: 'pylu',
 )
 
-# Install Python files
+# Install Python files and version
 py.install_sources(
     '__init__.py',
+    'VERSION',
     subdir: 'pylu',
 )
 

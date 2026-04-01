@@ -1,5 +1,18 @@
 # PyLU
 
+![top language](https://img.shields.io/github/languages/top/Technologicat/pylu)
+![supported Python versions](https://img.shields.io/pypi/pyversions/pylu)
+![supported implementations](https://img.shields.io/pypi/implementation/pylu)
+![CI status](https://img.shields.io/github/actions/workflow/status/Technologicat/pylu/ci.yml?branch=master)
+
+![version on PyPI](https://img.shields.io/pypi/v/pylu)
+![PyPI package format](https://img.shields.io/pypi/format/pylu)
+![dependency status](https://img.shields.io/librariesio/github/Technologicat/pylu)
+
+![license](https://img.shields.io/pypi/l/pylu)
+![open issues](https://img.shields.io/github/issues/Technologicat/pylu)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](http://makeapullrequest.com/)
+
 Small nogil-compatible Cython-based solver for linear equation systems `A x = b`.
 
 

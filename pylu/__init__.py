@@ -13,9 +13,6 @@ Python and Cython interfaces are provided. The API is designed
 to be as simple to use as possible.
 """
 
-from __future__ import absolute_import  # https://www.python.org/dev/peps/pep-0328/
-
-__version__ = '0.1.3'
+__version__ = '1.0.0'
 
 from .dgesv import *
-

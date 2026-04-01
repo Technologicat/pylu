@@ -9,6 +9,7 @@
 #
 # http://docs.cython.org/en/latest/src/reference/compilation.html
 #
+# cython: language_level = 3
 # cython: wraparound  = False
 # cython: boundscheck = False
 # cython: cdivision   = True
@@ -21,7 +22,11 @@ from libc.stdlib cimport malloc, free
 cimport cython  # Cython compiler directives (e.g. boundscheck)
 
 
-DEF DIAG_ELEMENT_ABS_TOL = 1e-15
+cdef extern from *:
+    """
+    #define DIAG_ELEMENT_ABS_TOL 1e-15
+    """
+    double DIAG_ELEMENT_ABS_TOL
 
 
 # LU decompose an  n x n  matrix in-place, using partial pivoting (row swaps).
@@ -41,7 +46,7 @@ DEF DIAG_ELEMENT_ABS_TOL = 1e-15
 # The storage format is packed so that the diagonal elements of L are implicitly 1 (not stored).
 # The diagonal of the decomposed A stores the diagonal elements of U.
 #
-cdef inline int decompose_lu_inplace_c( double* A, int* p, int n ) nogil:
+cdef inline int decompose_lu_inplace_c( double* A, int* p, int n ) noexcept nogil:
     cdef int i, j, k, r, s
 
     # Initialize permutation vector to range(n)
@@ -122,7 +127,7 @@ cdef inline int decompose_lu_inplace_c( double* A, int* p, int n ) nogil:
 #
 # We first solve L y = P b and then U x = y.
 #
-cdef inline void solve_decomposed_c( double* LU, int* p, double* b, double* x, int n ) nogil:
+cdef inline void solve_decomposed_c( double* LU, int* p, double* b, double* x, int n ) noexcept nogil:
     cdef int i, j
 
     # Solve  L y = P b  by forward substitution
@@ -153,7 +158,7 @@ cdef inline void solve_decomposed_c( double* LU, int* p, double* b, double* x, i
 # This saves a lot of flops if the bandwidths of L and U are small (especially significant if solving a large number of
 # equation systems using the same matrix).
 #
-cdef inline void solve_decomposed_banded_c( double* LU, int* p, int* mincols, int* maxcols, double* b, double* x, int n ) nogil:
+cdef inline void solve_decomposed_banded_c( double* LU, int* p, int* mincols, int* maxcols, double* b, double* x, int n ) noexcept nogil:
     cdef int i, j
 
     # Solve  L y = P b  by forward substitution
@@ -186,7 +191,7 @@ cdef inline void solve_decomposed_banded_c( double* LU, int* p, int* mincols, in
 #   // solve (N times, one for each right-hand side)
 #   solve_decomposed_c_banded(...)
 #
-cdef inline void find_bands_c( double* LU, int* mincols, int* maxcols, int n, double tol ) nogil:
+cdef inline void find_bands_c( double* LU, int* mincols, int* maxcols, int n, double tol ) noexcept nogil:
     cdef int i, j
 
     for i in range(n):
@@ -216,7 +221,7 @@ cdef inline void find_bands_c( double* LU, int* mincols, int* maxcols, int n, do
 # x (out) - rank-1 array, size (n); solution for A x = b
 # n (in)  - number of rows in A
 #
-cdef inline int solve_c( double* A, double* b, double* x, int n ) nogil:
+cdef inline int solve_c( double* A, double* b, double* x, int n ) noexcept nogil:
     cdef int* p     = <int*>(    malloc( n   * sizeof(int)    ) )
     cdef double* LU = <double*>( malloc( n*n * sizeof(double) ) )
 

@@ -1,2 +1,14 @@
 *.*~
 *.pyc
+__pycache__/
+*.so
+*.pyd
+*.c
+!meson.build
+build/
+builddir/
+dist/
+*.egg-info/
+.pdm-build/
+.pdm-python
+.venv/

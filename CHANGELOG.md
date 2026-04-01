@@ -1,5 +1,13 @@
 ## Changelog
 
+### [v1.0.0]
+ - **BREAKING**: Requires Python ≥ 3.11 (dropped Python 2.7 and 3.4 support)
+ - **BREAKING**: New build system — meson-python replaces setuptools
+ - Cython 3.x compatibility (language_level=3, noexcept, relative cimport, DEF→cdef extern)
+ - `.pxd` file is installed for downstream `cimport pylu.dgesv`
+ - Tests rewritten as pytest
+ - CI on Linux, macOS, and Windows (Python 3.11–3.14)
+
 ### [v0.1.3]
  - support both Python 3.4 and 2.7
 

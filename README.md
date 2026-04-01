@@ -30,7 +30,7 @@ b = np.random.random( 5 )
 x = pylu.solve( A, b )
 ```
 
-For a complete tour, see [`pylu_test.py`](test/pylu_test.py).
+For a complete tour, see the [test suite](tests/test_dgesv.py).
 
 The main item of interest, however, is the Cython API in [`dgesv.pxd`](pylu/dgesv.pxd). The main differences to the Python API are:
 
@@ -43,47 +43,45 @@ The main item of interest, however, is the Cython API in [`dgesv.pxd`](pylu/dges
 
 ### From PyPI
 
-Install as user:
-
 ```bash
-pip install pylu --user
+pip install pylu
 ```
 
-Install as admin:
-
-```bash
-sudo pip install pylu
-```
-
-### From GitHub
-
-As user:
+### From source
 
 ```bash
 git clone https://github.com/Technologicat/pylu.git
 cd pylu
-python setup.py install --user
+pip install .
 ```
 
-As admin, change the last command to
+### Development setup
+
+PyLU uses [meson-python](https://meson-python.readthedocs.io/) as its build backend and [PDM](https://pdm-project.org/) for dependency management.
 
 ```bash
-sudo python setup.py install
+git clone https://github.com/Technologicat/pylu.git
+cd pylu
+pdm install
+pip install --no-build-isolation -e .
 ```
+
+**Note on editable installs:** meson-python editable installs rebuild the Cython extension on import via a redirect `.pth` file. After modifying `.pyx` or `.pxd` files, re-run `pip install --no-build-isolation -e .` to rebuild. Alternatively, use a non-editable install (`pip install .`) and reinstall after changes.
 
 
 ## Dependencies
 
-- [NumPy](http://www.numpy.org)
-- [Cython](http://www.cython.org)
+- [NumPy](http://www.numpy.org) ≥ 1.25
+- [Cython](http://www.cython.org) ≥ 3.0 (build-time only)
+
+Requires Python ≥ 3.11.
 
 
 ## License
 
-[BSD](LICENSE.md). Copyright 2016-2017 Juha Jeronen and University of Jyväskylä.
+[BSD](LICENSE.md). Copyright 2016–2026 Juha Jeronen, University of Jyväskylä, and JAMK University of Applied Sciences.
 
 
 #### Acknowledgement
 
 This work was financially supported by the Jenny and Antti Wihuri Foundation.
-

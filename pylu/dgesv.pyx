@@ -20,15 +20,19 @@
 #
 # http://docs.cython.org/en/latest/src/reference/compilation.html
 #
+# cython: language_level = 3
 # cython: wraparound  = False
 # cython: boundscheck = False
 # cython: cdivision   = True
 
-from __future__ import division
-
 import numpy as np
 
-cimport dgesv  # Cython interface and implementation
+from . cimport dgesv  # Cython interface and implementation
+
+__all__ = ["solve",
+           "lup", "lup_packed",
+           "solve_decomposed",
+           "find_bands", "solve_decomposed_banded"]
 
 #################################################
 # Python interface for demonstration and testing

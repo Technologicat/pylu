@@ -1,0 +1,55 @@
+[build-system]
+requires = ["meson-python>=0.16", "Cython>=3.0", "numpy>=1.25"]
+build-backend = "mesonpy"
+
+[project]
+name = "pylu"
+version = "1.0.0"
+description = "Small nogil-compatible linear equation system solver"
+readme = "README.md"
+license = "BSD-2-Clause"
+requires-python = ">=3.11"
+authors = [
+    {name = "Juha Jeronen", email = "juha.jeronen@jamk.fi"},
+]
+keywords = [
+    "numerical", "linear-equations", "solver",
+    "lu-decomposition", "cython", "numpy",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Cython",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+dependencies = ["numpy>=1.25"]
+
+[project.optional-dependencies]
+test = ["pytest>=7.0"]
+
+[project.urls]
+Homepage = "https://github.com/Technologicat/pylu"
+Repository = "https://github.com/Technologicat/pylu"
+Issues = "https://github.com/Technologicat/pylu/issues"
+Changelog = "https://github.com/Technologicat/pylu/blob/master/CHANGELOG.md"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pip",
+    "Cython>=3.0",
+    "flake8",
+    "autopep8",
+    "importmagic",
+    "epc",
+    "jedi>=0.19.2",
+]

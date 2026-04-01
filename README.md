@@ -68,6 +68,14 @@ cd pylu
 pip install .
 ```
 
+For maximum performance on your machine, build with architecture-specific optimizations:
+
+```bash
+CFLAGS="-march=native" pip install --no-build-isolation .
+```
+
+Pre-built wheels from PyPI use generic `-O2` because `-march=native` bakes in the instruction set of the build machine — a wheel built with AVX-512 would crash on a CPU without it. Building from source avoids this and lets the compiler target your specific hardware.
+
 ### Development setup
 
 PyLU uses [meson-python](https://meson-python.readthedocs.io/) as its build backend and [PDM](https://pdm-project.org/) for dependency management.
@@ -78,6 +86,8 @@ cd pylu
 pdm install
 pip install --no-build-isolation -e .
 ```
+
+The `--no-build-isolation` flag is required for editable installs with meson-python. Normally pip builds in a temporary isolated venv, but meson-python's editable mode needs the build dependencies (Cython, NumPy, meson) to remain available in the environment for on-import rebuilds.
 
 **Note on editable installs:** meson-python editable installs rebuild the Cython extension on import via a redirect `.pth` file. After modifying `.pyx` or `.pxd` files, re-run `pip install --no-build-isolation -e .` to rebuild. Alternatively, use a non-editable install (`pip install .`) and reinstall after changes.
 

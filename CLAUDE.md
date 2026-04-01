@@ -65,7 +65,7 @@ pdm run python -c "import pylu; from pathlib import Path; print(list(Path(pylu._
 
 ## Linting
 
-Always invoke tools from the venv via `pdm run`.
+Activate the venv first (`source .venv/bin/activate`), or prefix commands with `pdm run`.
 
 **Python files** (flake8 cannot parse Cython syntax):
 

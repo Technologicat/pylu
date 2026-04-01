@@ -1,5 +1,9 @@
 ## Changelog
 
+### [v1.0.1] (in progress)
+
+*No user-visible changes yet.*
+
 ### [v1.0.0] — 2026-04-01
  - **BREAKING**: Requires Python ≥ 3.11 (dropped Python 2.7 and 3.4 support)
  - **BREAKING**: New build system — meson-python replaces setuptools

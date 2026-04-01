@@ -13,6 +13,6 @@ Python and Cython interfaces are provided. The API is designed
 to be as simple to use as possible.
 """
 
-__version__ = '1.0.0'
+__version__ = '1.0.1.dev0'
 
 from .dgesv import *

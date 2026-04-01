@@ -63,6 +63,31 @@ The `.pxd` file **must** be installed alongside the compiled `.so` so that downs
 pdm run python -c "import pylu; from pathlib import Path; print(list(Path(pylu.__file__).parent.glob('*.pxd')))"
 ```
 
+## Linting
+
+flake8 cannot parse `.pyx`/`.pxd` files — lint only the pure Python files:
+
+```bash
+pdm run flake8 tests/ pylu/__init__.py --select=E9,F63,F7,F82 --show-source
+```
+
+## Code Conventions
+
+- **Line width:** ~110 characters.
+- **Docstring format:** reStructuredText (existing `.pyx` docstrings use a custom format — leave them as-is).
+- **Dependencies:** NumPy is the only runtime dependency. Do not add others. Build-time deps (Cython, meson-python) are fine.
+
+## Python Version Compatibility
+
+When adding support for a new Python version:
+
+1. Update `requires-python` in `pyproject.toml` (if changing the floor).
+2. Add the version classifier in `pyproject.toml`.
+3. Add to the CI matrix in `.github/workflows/ci.yml` (both `test` and `build-wheels` jobs).
+4. Run the full test suite on the new version and verify the cimport test passes.
+
+NumPy and Cython compatibility with the new Python version are the main risk factors.
+
 ## Key Rules
 
 - **Do not refactor the numerical algorithm.** The LU code is mathematically correct and performance-tested. Only fix compatibility issues.

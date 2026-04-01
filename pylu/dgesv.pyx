@@ -27,7 +27,7 @@
 
 import numpy as np
 
-from . cimport dgesv  # Cython interface and implementation
+from . cimport dgesv  # Cython interface and implementation; cython-lint false positive: the cimport brings _c functions into scope
 
 __all__ = ["solve",
            "lup", "lup_packed",
@@ -58,8 +58,8 @@ def solve( double[:,::1] A, double[::1] b ):
     Raises RuntimeError if LU decomposition fails.
 
     """
-#    assert( A.shape[0] == A.shape[1], "Matrix A must be square" )
-#    assert( A.shape[0] == b.shape[0], "Length of load vector b must match the number of rows in A" )
+#    assert A.shape[0] == A.shape[1], "Matrix A must be square"
+#    assert A.shape[0] == b.shape[0], "Length of load vector b must match the number of rows in A"
 
     cdef double[::1] x = np.empty( (b.shape[0],), dtype=np.float64, order="C" )
 
@@ -112,7 +112,7 @@ def lup( double[:,::1] A ):
     Raises RuntimeError if LU decomposition fails.
 
     """
-    assert( A.shape[0] == A.shape[1], "Matrix A must be square" )
+    assert A.shape[0] == A.shape[1], "Matrix A must be square"
 
     cdef int[::1] p
     cdef double[:,::1] LU
@@ -152,7 +152,7 @@ def lup_packed( double[:,::1] A ):
     Raises RuntimeError if LU decomposition fails.
 
     """
-    assert( A.shape[0] == A.shape[1], "Matrix A must be square" )
+    assert A.shape[0] == A.shape[1], "Matrix A must be square"
 
     cdef int n            = A.shape[0]
     cdef double[:,::1] LU = A.copy()
@@ -180,9 +180,9 @@ def solve_decomposed( double[:,::1] LU, int[::1] p, double[::1] b ):
     Returns:
         x        = rank-1 np.array of double. Solution vector.
     """
-#    assert( LU.shape[0] == LU.shape[1], "Matrix LU must be square" )
-#    assert( LU.shape[0] == np.shape(p)[0],  "Length of permutation vector b must match the number of rows in LU" )
-#    assert( LU.shape[0] == b.shape[0],  "Length of load vector b must match the number of rows in LU" )
+#    assert LU.shape[0] == LU.shape[1], "Matrix LU must be square"
+#    assert LU.shape[0] == np.shape(p)[0], "Length of permutation vector b must match the number of rows in LU"
+#    assert LU.shape[0] == b.shape[0], "Length of load vector b must match the number of rows in LU"
 
     cdef double[::1] x = np.empty( (b.shape[0],), dtype=np.float64, order="C" )
 
@@ -222,7 +222,7 @@ def find_bands( double[:,::1] LU, double tol ):
 
     """
 
-    assert( LU.shape[0] == LU.shape[1], "Matrix LU must be square" )
+    assert LU.shape[0] == LU.shape[1], "Matrix LU must be square"
 
     cdef int n = LU.shape[0]
     cdef int[::1] mincols = np.empty( (n,), dtype=np.intc, order="C" )
@@ -249,11 +249,11 @@ def solve_decomposed_banded( double[:,::1] LU, int[::1] p, int[::1] mincols, int
     Returns:
         x             = rank-1 np.array of double. Solution vector.
     """
-#    assert( LU.shape[0] == LU.shape[1],       "Matrix LU must be square" )
-#    assert( LU.shape[0] == np.shape(p)[0],        "Length of permutation vector b must match the number of rows in LU" )
-#    assert( LU.shape[0] == np.shape(mincols)[0],  "Length of mincols vector must match the number of rows in LU" )
-#    assert( LU.shape[0] == np.shape(maxcols)[0],  "Length of maxcols vector must match the number of rows in LU" )
-#    assert( LU.shape[0] == b.shape[0],        "Length of load vector b must match the number of rows in LU" )
+#    assert LU.shape[0] == LU.shape[1], "Matrix LU must be square"
+#    assert LU.shape[0] == np.shape(p)[0], "Length of permutation vector b must match the number of rows in LU"
+#    assert LU.shape[0] == np.shape(mincols)[0], "Length of mincols vector must match the number of rows in LU"
+#    assert LU.shape[0] == np.shape(maxcols)[0], "Length of maxcols vector must match the number of rows in LU"
+#    assert LU.shape[0] == b.shape[0], "Length of load vector b must match the number of rows in LU"
 
     cdef double[::1] x = np.empty( (b.shape[0],), dtype=np.float64, order="C" )
 

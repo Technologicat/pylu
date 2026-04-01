@@ -7,7 +7,29 @@ on:
     branches: [master]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install linters
+        run: pip install flake8 cython-lint
+
+      - name: Lint Python (hard errors)
+        run: flake8 tests/ pylu/__init__.py --select=E9,F63,F7,F82 --show-source
+
+      - name: Lint Python (warnings)
+        run: flake8 tests/ pylu/__init__.py --exit-zero --max-line-length=130
+
+      - name: Lint Cython
+        run: cython-lint pylu/dgesv.pyx pylu/dgesv.pxd || true
+
   test:
+    needs: lint
     strategy:
       fail-fast: false
       matrix:

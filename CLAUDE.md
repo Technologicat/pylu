@@ -65,11 +65,22 @@ pdm run python -c "import pylu; from pathlib import Path; print(list(Path(pylu._
 
 ## Linting
 
-flake8 cannot parse `.pyx`/`.pxd` files — lint only the pure Python files:
+Always invoke tools from the venv via `pdm run`.
+
+**Python files** (flake8 cannot parse Cython syntax):
 
 ```bash
 pdm run flake8 tests/ pylu/__init__.py --select=E9,F63,F7,F82 --show-source
+pdm run flake8 tests/ pylu/__init__.py --exit-zero --max-line-length=130
 ```
+
+**Cython files** (cython-lint; config in `pyproject.toml` under `[tool.cython-lint]`):
+
+```bash
+pdm run cython-lint pylu/dgesv.pyx pylu/dgesv.pxd
+```
+
+Known false positive: `'dgesv' imported but unused` on the `from . cimport dgesv` line — this cimport is what brings the `_c` functions into scope.
 
 ## Code Conventions
 

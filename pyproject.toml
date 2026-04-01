@@ -42,10 +42,15 @@ Repository = "https://github.com/Technologicat/pylu"
 Issues = "https://github.com/Technologicat/pylu/issues"
 Changelog = "https://github.com/Technologicat/pylu/blob/master/CHANGELOG.md"
 
+[tool.cython-lint]
+max-line-length = 200
+ignore = ["E115", "E201", "E202", "E221", "E231", "E302", "W293", "W391"]
+
 [dependency-groups]
 dev = [
     "pytest>=8.0",
     "pip",
+    "cython-lint",
     "Cython>=3.0",
     "flake8",
     "autopep8",

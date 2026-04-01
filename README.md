@@ -15,6 +15,10 @@
 
 Small nogil-compatible Cython-based solver for linear equation systems `A x = b`.
 
+We use [semantic versioning](https://semver.org/).
+
+For my stance on AI contributions, see the [collaboration guidelines](https://github.com/Technologicat/substrate-independent/blob/main/collaboration.md).
+
 
 ## Introduction
 

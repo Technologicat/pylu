@@ -1,6 +1,6 @@
 ## Changelog
 
-### [v1.0.0]
+### [v1.0.0] — 2026-04-01
  - **BREAKING**: Requires Python ≥ 3.11 (dropped Python 2.7 and 3.4 support)
  - **BREAKING**: New build system — meson-python replaces setuptools
  - Cython 3.x compatibility (language_level=3, noexcept, relative cimport, DEF→cdef extern)
@@ -8,10 +8,10 @@
  - Tests rewritten as pytest
  - CI on Linux, macOS, and Windows (Python 3.11–3.14)
 
-### [v0.1.3]
+### [v0.1.3] — 2017-04-25
  - support both Python 3.4 and 2.7
 
-### [v0.1.2]
+### [v0.1.2] — 2017-04-24
  - **bugfix**: `solve_decomposed` and `solve_decomposed_banded` now return proper `np.ndarray` objects (not memoryview slices)
  - setup.py is now Python 3 compatible
  - general tidiness:
@@ -19,9 +19,9 @@
    - removed unused dependencies (oops)
    - fixed URL in setup.py
 
-### [v0.1.1]
+### [v0.1.1] — 2017-04-11
  - set zip_safe to False to better work with Cython (important for libs that depend on this one)
 
-### [v0.1.0]
+### [v0.1.0] — 2017-04-07
  - initial release as separate project
 

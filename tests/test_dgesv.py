@@ -129,7 +129,7 @@ class TestBandedSolver:
         np.testing.assert_allclose(x_full, x_banded, rtol=1e-14)
 
     def test_diagonal_matrix(self):
-        n = 5
+        n = 5  # noqa: F841 -- documents matrix dimension
         A = np.diag([1.0, 2.0, 3.0, 4.0, 5.0])
         b = np.array([2.0, 6.0, 12.0, 20.0, 30.0])
 

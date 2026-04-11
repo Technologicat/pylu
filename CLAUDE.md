@@ -69,12 +69,13 @@ pdm run python -c "import pylu; from pathlib import Path; print(list(Path(pylu._
 
 ## Linting
 
-**Python files** (flake8 cannot parse Cython syntax):
+**Python files** (ruff):
 
 ```bash
-pdm run flake8 tests/ pylu/__init__.py --select=E9,F63,F7,F82 --show-source
-pdm run flake8 tests/ pylu/__init__.py --exit-zero --max-line-length=130
+ruff check <changed .py files>   # primary linter (config in pyproject.toml)
 ```
+
+Legacy flake8 available for Emacs flycheck (no flake8rc — uses global config).
 
 **Cython files** (cython-lint; config in `pyproject.toml` under `[tool.cython-lint]`):
 

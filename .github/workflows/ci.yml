@@ -18,13 +18,12 @@ jobs:
           python-version: "3.14"
 
       - name: Install linters
-        run: pip install flake8 cython-lint
+        run: pip install ruff cython-lint
 
-      - name: Lint Python (hard errors)
-        run: flake8 tests/ pylu/__init__.py --select=E9,F63,F7,F82 --show-source
-
-      - name: Lint Python (warnings)
-        run: flake8 tests/ pylu/__init__.py --exit-zero --max-line-length=130
+      - name: Lint Python with ruff
+        run: ruff check . --ignore SIM103
+      - name: Lint advisories (non-blocking)
+        run: ruff check . --select SIM103 || true
 
       - name: Lint Cython
         run: cython-lint pylu/dgesv.pyx pylu/dgesv.pxd || true

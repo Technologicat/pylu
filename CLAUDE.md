@@ -18,6 +18,8 @@ pdm use 3.14
 pdm install
 ```
 
+Prefix commands with `pdm run` if the venv is not active.
+
 **Editable installs:** meson-python editable installs rebuild the extension on import. After modifying `.pyx` or `.pxd` files, re-run `pdm install` to rebuild. Alternatively, use a non-editable install (`pip install .`) and reinstall after changes.
 
 **Version:** single source of truth is `pylu/VERSION`. Read by `meson.build` (build-time), `pyproject.toml` (dynamic), and `__init__.py` (runtime). Only edit `pylu/VERSION` when bumping.
@@ -66,8 +68,6 @@ pdm run python -c "import pylu; from pathlib import Path; print(list(Path(pylu._
 ```
 
 ## Linting
-
-Activate the venv first (`source .venv/bin/activate`), or prefix commands with `pdm run`.
 
 **Python files** (flake8 cannot parse Cython syntax):
 

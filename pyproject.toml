@@ -33,9 +33,6 @@ classifiers = [
 ]
 dependencies = ["numpy>=1.25"]
 
-[project.optional-dependencies]
-test = ["pytest>=7.0"]
-
 [project.urls]
 Homepage = "https://github.com/Technologicat/pylu"
 Repository = "https://github.com/Technologicat/pylu"

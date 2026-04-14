@@ -11,6 +11,11 @@ project(
     ],
 )
 
+# Ensure <math.h> exposes M_PI and friends on MSVC. No-op on Linux/macOS;
+# disarms a Windows-only landmine if any downstream Cython code ever touches
+# the math constants.
+add_project_arguments('-D_USE_MATH_DEFINES', language: 'c')
+
 py = import('python').find_installation(pure: false)
 
 # NumPy include directory (needed for Cython compilation against NumPy)

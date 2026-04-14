@@ -208,8 +208,13 @@ is what makes downstream `cimport pylu.dgesv` work.
 **On compiler flags:** The old `setup.py` used `-march=native -msse -msse2 -mfma
 -mfpmath=sse`. These must NOT go into the default build — they make wheels
 non-portable. Meson's `buildtype=release` gives `-O2` which is correct for
-distributed wheels. Users building from source who want `-march=native` can set
-`CFLAGS="-march=native -mfma"` before building. Do not hardcode these. Verify after migration by:
+distributed wheels. Users building from source who want architecture tuning
+can set `CFLAGS="-march=native"` before building — that one flag is
+sufficient. `-msse`/`-msse2`/`-mfpmath=sse` are no-ops on x86_64 (SSE2 is
+part of the x86_64 baseline; GCC's default `-mfpmath` is already `sse`),
+and `-mfma` is either implied by `-march=native` on Haswell+ (2013 and
+later) or not supported by the CPU at all. Do not hardcode any of these.
+Verify after migration by:
 1. `pip install .` (or `pip install dist/pylu-1.0.0-*.whl`)
 2. Check that `dgesv.pxd` exists in the installed package:
    `python -c "import pylu; import pathlib; print(list(pathlib.Path(pylu.__file__).parent.glob('*.pxd')))"`

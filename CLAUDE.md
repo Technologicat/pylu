@@ -15,12 +15,17 @@ Uses meson-python as build backend, PDM for dependency management. Python ≥ 3.
 ```bash
 pdm config venv.in_project true
 pdm use 3.14
-pdm install
+pdm install                                                 # dev deps into .venv
+pdm run python -m pip install --no-build-isolation -e .     # editable install
 ```
 
 Prefix commands with `pdm run` if the venv is not active.
 
-**Editable installs:** meson-python editable installs rebuild the extension on import. After modifying `.pyx` or `.pxd` files, re-run `pdm install` to rebuild. Alternatively, use a non-editable install (`pip install .`) and reinstall after changes.
+**Why `--no-build-isolation`:** meson-python's editable loader rebuilds the extension on import, so it needs `meson`, `ninja`, and Cython to remain available in the venv — not just in a throwaway PEP 517 overlay. PDM's default `pdm install` runs the backend in an isolated overlay whose `ninja` path gets burned into the loader and then disappears, causing `FileNotFoundError: .../ninja` on import. The `pip install --no-build-isolation -e .` form reuses the venv directly and produces a loader with stable paths.
+
+**PATH note:** The editable loader needs `meson` and `ninja` on `PATH`. If you get rebuild errors: `export PATH="$(pwd)/.venv/bin:$PATH"` (or just use `pdm run`).
+
+**Editable installs:** After modifying `.pyx` or `.pxd` files, the next import auto-rebuilds the extension — no manual reinstall needed. Alternatively, for a clean non-editable build, use `pip install .` and reinstall after changes.
 
 **Version:** single source of truth is `pylu/VERSION`. Read by `meson.build` (build-time), `pyproject.toml` (dynamic), and `__init__.py` (runtime). Only edit `pylu/VERSION` when bumping.
 

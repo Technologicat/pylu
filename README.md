@@ -87,13 +87,19 @@ PyLU uses [meson-python](https://meson-python.readthedocs.io/) as its build back
 ```bash
 git clone https://github.com/Technologicat/pylu.git
 cd pylu
-pdm install
-pip install --no-build-isolation -e .
+pdm install                              # creates venv, installs dev deps
+pip install --no-build-isolation -e .    # editable install (needs venv activated)
 ```
 
-The `--no-build-isolation` flag is required for editable installs with meson-python. Normally pip builds in a temporary isolated venv, but meson-python's editable mode needs the build dependencies (Cython, NumPy, meson) to remain available in the environment for on-import rebuilds.
+The `--no-build-isolation` flag is required for editable installs with meson-python — the on-import rebuild mechanism needs build dependencies (Cython, NumPy, meson, ninja) to remain available in the environment, not just in a throwaway build-time overlay.
 
-**Note on editable installs:** meson-python editable installs rebuild the Cython extension on import via a redirect `.pth` file. After modifying `.pyx` or `.pxd` files, re-run `pip install --no-build-isolation -e .` to rebuild. Alternatively, use a non-editable install (`pip install .`) and reinstall after changes.
+**PATH note:** The meson-python editable loader needs `meson` and `ninja` on `PATH`. If you get rebuild errors, ensure the venv's `bin/` is on the path:
+
+```bash
+export PATH="$(pwd)/.venv/bin:$PATH"
+```
+
+**Note on editable installs:** After modifying `.pyx` or `.pxd` files, the next import auto-rebuilds the Cython extension — no manual reinstall step needed. For a clean non-editable build, use `pip install .` and reinstall after changes.
 
 
 ## Dependencies

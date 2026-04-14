@@ -9,7 +9,6 @@
 #
 # http://docs.cython.org/en/latest/src/reference/compilation.html
 #
-# cython: language_level = 3
 # cython: wraparound  = False
 # cython: boundscheck = False
 # cython: cdivision   = True

@@ -16,6 +16,10 @@ project(
 # the math constants.
 add_project_arguments('-D_USE_MATH_DEFINES', language: 'c')
 
+# Set Cython language level globally so new .pyx/.pxd files can't silently
+# miss it. Replaces per-file `# cython: language_level = 3` directives.
+add_project_arguments('-X', 'language_level=3', language: 'cython')
+
 py = import('python').find_installation(pure: false)
 
 # NumPy include directory (needed for Cython compilation against NumPy)

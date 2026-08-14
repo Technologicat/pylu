@@ -11,4 +11,5 @@ dist/
 *.egg-info/
 .pdm-build/
 .pdm-python
+.python-version
 .venv/

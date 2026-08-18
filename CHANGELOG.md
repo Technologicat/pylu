@@ -2,7 +2,7 @@
 
 ### [v1.0.2] (in progress)
 
-*No user-visible changes yet.*
+ - Python 3.15 is now supported and tested, and wheels are built for it.
 
 ### [v1.0.1] — 2026-08-14
 

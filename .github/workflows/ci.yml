@@ -36,7 +36,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Full Python matrix on Linux; newest Python only on macOS and Windows.
+        # Full Python matrix on Linux; newest stable Python only on macOS and Windows.
         # Rationale: this `test` job exists for fast feedback ahead of the
         # `build-wheels` job, which runs `cibuildwheel` with CIBW_TEST_COMMAND
         # on every (Python × OS) combination anyway.  Duplicating the full
